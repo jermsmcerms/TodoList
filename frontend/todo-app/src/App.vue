@@ -1,27 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <div id="app">
+        <h1>List</h1>
+    </div>
+    <ul>
+        <li v-for="item of items" :key="item.itemId">
+            {{ item.title }}
+        </li>
+    </ul>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
-
-@Options({
-  components: {
-    HelloWorld,
-  },
-})
-export default class App extends Vue {}
+import axios from 'axios'
+export default {
+    name: "App",
+    data() {
+        return {
+            items: [],
+        };
+    },
+    async created() {
+        try {
+            const res = await axios.get(`http://localhost:5023/TodoItem`);
+            this.items = res.data;
+            console.log(this.items);
+        } catch (error) {
+            console.log(error);
+        }
+    },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
