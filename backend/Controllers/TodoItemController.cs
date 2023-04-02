@@ -44,7 +44,7 @@ public class TodoItemController : ControllerBase {
         return Ok();
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public IActionResult UpdateItem(TodoItem item) {
         TodoItem? todoItem = _context.TodoItems
             .FirstOrDefault(i => i.ItemId == item.ItemId);
@@ -62,7 +62,7 @@ public class TodoItemController : ControllerBase {
         return Ok();
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public IActionResult DeleteItem(int id) {
         TodoItem? item = _context.TodoItems
             .FirstOrDefault(i => i.ItemId == id);
