@@ -7,73 +7,36 @@ namespace Controllers;
 [ApiController]
 [Route("[controller]")]
 public class TodoItemController : ControllerBase {
-    private TodoDbContext _context;
+    private ITodoListService _todoService;
 
-    public TodoItemController(TodoDbContext context) {
-        _context = context;
+    public TodoItemController(ITodoListService service) {
+        _todoService = service;
     }
 
     [HttpGet]
     public IEnumerable<TodoItem> Get() {
-        return _context.TodoItems.ToArray();
+        return _todoService.GetAll();
     }
 
     [HttpGet("{id}")]
     public IActionResult GetItem(int id) {
-        if(id < 1) {
-            return NotFound("Invalid id");
-        }
-
-        TodoItem? item = _context.TodoItems
-            .FirstOrDefault(item => item.ItemId == id);
-
-        if(item == null) {
-            return NotFound("Todo item not found");
-        }
-
-        return Ok(item);
+        TodoItem? item = _todoService.GetById(id);
+        return item == null ? Ok(item) : NotFound("Todo item not found");
     }
 
     [HttpPost]
     public IActionResult AddTodo(TodoItem item) {
-        using(var todoItem = new TodoDbContext()) {
-            todoItem.TodoItems.Add(item);
-            todoItem.SaveChanges();
-        }
-
-        return Ok();
+        return _todoService.Post(item) ? Ok() : BadRequest();
     }
 
     [HttpPut("{id}")]
     public IActionResult UpdateItem(TodoItem item) {
-        TodoItem? todoItem = _context.TodoItems
-            .FirstOrDefault(i => i.ItemId == item.ItemId);
-        
-        if(todoItem == null) {
-            return NotFound($"item id {item.ItemId} does not exist in database");
-        }
-
-        todoItem.Title = item.Title;
-        todoItem.Note = item.Note;
-        todoItem.IsComplete = item.IsComplete;
-
-        _context.SaveChanges();
-
-        return Ok();
+        return _todoService.Put(item) ? Ok() : BadRequest();
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteItem(int id) {
-        TodoItem? item = _context.TodoItems
-            .FirstOrDefault(i => i.ItemId == id);
-
-        if(item == null) {
-            return NotFound($"item {id} not found");
-        }
-
-        _context.TodoItems.Remove(item);
-        _context.SaveChanges();
-
-        return Ok();
+    public IActionResult DeleteItem(int id) {    
+        return _todoService.Delete(id) ?  Ok() : BadRequest();
     }
 }
+

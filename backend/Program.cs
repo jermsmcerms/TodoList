@@ -1,4 +1,5 @@
 using Context;
+using Services;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -15,7 +16,9 @@ builder.Services.AddCors(options => {
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddScoped<ITodoListService, OpenTodoListService>();
 builder.Services.AddTransient<TodoDbContext>();
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
