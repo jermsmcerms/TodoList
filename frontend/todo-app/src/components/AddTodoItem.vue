@@ -1,23 +1,41 @@
 <template>
     <h2>Add Item</h2>
-    <input 
-        type="text" 
-        v-model="item.title"
-        placeholder="title"/>  
-    <input 
-        type="text" 
-        v-model="item.note"
-        placeholder="note"/><br />
-    <input type="date" v-model="item.dueDate"/>
-    <div>
-        <label>Complete?&nbsp</label>
-        <input type="checkbox" v-model="item.isCompleted" />  
-    </div> 
-    <div>
-        <button @click="addItem()" >Add Item</button> 
-    </div>
-    <div>
-        <p>{{ message }}</p>
+    <div class="container">
+        <div class="row">
+            <label class="col-lg-1">Title</label>
+            <input 
+            class="col-lg-2" 
+            type="text" 
+            v-model="item.title"
+            placeholder="title"/>
+        </div>
+        <div class="row">
+            <label class="col-lg-1">Note</label>
+            <input
+            class="col-lg-2"
+            type="text" 
+            v-model="item.note"
+            placeholder="note"/><br />
+        </div>
+        <div class="row">
+            <label class="col-lg-1">Due Date</label>
+            <input class="col-lg-2" type="date" v-model="item.dueDate"/>
+        </div>
+        <div class="row">
+            <label class="col-lg-1">Complete?&nbsp</label>
+            <input 
+                class="col-lg-2" 
+                type="checkbox" 
+                v-model="item.isCompleted" />  
+        </div> 
+        <div>
+            <button 
+                class="btn btn-primary" 
+                @click="addItem()" >Add Item</button> 
+        </div>
+        <div>
+            <p>{{ message }}</p>
+        </div>
     </div>
 </template>
 

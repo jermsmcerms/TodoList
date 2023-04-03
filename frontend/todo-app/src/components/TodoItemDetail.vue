@@ -1,23 +1,44 @@
 <template>
-    <div v-if="currentItem.itemId" class="edit-form">
-       <input 
-            type="text" 
-            :placeholder="currentItem.title"
-            v-model="currentItem.title" />
-       <input 
-            type="text" 
-            :placeholder="currentItem.note"
-            v-model="currentItem.note">
-       <input 
-            type="checkbox" 
-            v-bind:id="currentItem.id" 
-            v-model="currentItem.isComplete" />
-       <input
-            type="date"
-            v-bind:data-id="currentItem.id"
-            v-model="currentItem.dueDate">
+    <h2>Edit Todo</h2>
+    <div class="container">
+        <div v-if="currentItem.itemId" class="edit-form">
+            <div class="row">
+                <label class="col-lg-1">
+                    Title
+                </label>
+                <input 
+                    class="col-lg-2" 
+                    type="text" 
+                    :placeholder="currentItem.title"
+                    v-model="currentItem.title" />
+            </div>
+            <div class="row">
+                <label class="col-lg-1">Note</label>
+                <input 
+                    class="col-lg-2" 
+                    type="text" 
+                    :placeholder="currentItem.note"
+                    v-model="currentItem.note">
+            </div> 
+            <div class="row">
+                <label class="col-lg-1">Due Date</label>
+                <input
+                    class="col-lg-2" 
+                    type="date"
+                    v-bind:data-id="currentItem.id"
+                    v-model="currentItem.dueDate">
+            </div>
+            <div class="row">
+                <label class="col-lg-1">Complete</label>
+                <input 
+                    class="col-lg-2" 
+                    type="checkbox" 
+                    v-bind:id="currentItem.id" 
+                    v-model="currentItem.isComplete" />
+            </div>
+        </div>
+        <button @click="updateItem()">Update</button>
     </div>
-    <button @click="updateItem()">Update</button>
 </template>
 
 <script lang="ts">
