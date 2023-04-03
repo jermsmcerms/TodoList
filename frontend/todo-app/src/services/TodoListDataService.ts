@@ -15,7 +15,7 @@ class TodoListDataService {
     }
 
     update(item: TodoItem): Promise<any> {
-        return http.put(`/TodoItem/${item.id}`, item);
+        return http.put(`/TodoItem/${item.itemId}`, item);
     }
 
     delete(id: number): Promise<any> {

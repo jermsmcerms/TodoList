@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Context;
 using Models;
 
 namespace Controllers;
@@ -21,7 +20,11 @@ public class TodoItemController : ControllerBase {
     [HttpGet("{id}")]
     public IActionResult GetItem(int id) {
         TodoItem? item = _todoService.GetById(id);
-        return item == null ? Ok(item) : NotFound("Todo item not found");
+        if(item == null) {            
+            return NotFound("Todo item not found");
+        }
+
+        return Ok(item);
     }
 
     [HttpPost]

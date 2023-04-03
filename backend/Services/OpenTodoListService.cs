@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Models;
 using Context;
 
@@ -35,6 +34,7 @@ public class OpenTodoListService : ITodoListService {
         todoItem.Title = item.Title;
         todoItem.Note = item.Note;
         todoItem.IsComplete = item.IsComplete;
+        todoItem.DueDate = item.DueDate;
 
         return _context.SaveChanges() > 0;
     }

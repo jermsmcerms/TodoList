@@ -8,10 +8,11 @@
         type="text" 
         v-model="item.note"
         placeholder="note"/><br />
+    <input type="date" v-model="item.dueDate"/>
     <div>
         <label>Complete?&nbsp</label>
         <input type="checkbox" v-model="item.isCompleted" />  
-    </div>
+    </div> 
     <div>
         <button @click="addItem()" >Add Item</button> 
     </div>

@@ -13,4 +13,7 @@ public class TodoItem {
     public string? Note {get;set;}
     
     public bool IsComplete {get;set;}
+    
+    public string? DueDate {get;set;}
 }
+

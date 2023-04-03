@@ -7,16 +7,18 @@
                     <th scope="col">Title</th>
                     <th scope="col">Note</th>
                     <th scope="col">Is Complete</th>
+                    <th scope="col">Due Date</th>
                 </tr>
             </thead>
             <tbody 
                 :class="{ active: index == currentIndex }"
                 v-for="(item, index) in items"
                 :key="index">
-                <tr>
+                <tr> 
                     <th scope="col">{{ item.title }}</th>
                     <th scope="col">{{ item.note }}</th>
                     <th scope="col">{{ item.isComplete }}</th>
+                    <th scope="col">{{ item.dueDate }}</th>
                     <th scope="col">
                         <router-link :to="'TodoItem/' + item.itemId">
                             Edit

@@ -2,6 +2,7 @@
 using Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TodoList.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    partial class TodoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230402210339_AddPriority")]
+    partial class AddPriority
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -23,6 +26,7 @@ namespace TodoList.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("DueDate")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsComplete")
@@ -31,6 +35,9 @@ namespace TodoList.Migrations
                     b.Property<string>("Note")
                         .HasMaxLength(500)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()

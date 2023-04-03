@@ -1,7 +1,9 @@
 export default interface TodoItem {
-    id: null;
+    itemId: number;
     title: string;
     note: string;
     isComplete: boolean;
+    dueDate: string;
+    priority: number;
 }
 

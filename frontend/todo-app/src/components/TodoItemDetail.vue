@@ -10,8 +10,12 @@
             v-model="currentItem.note">
        <input 
             type="checkbox" 
-            v-bind:id="currentItem.itemId" 
+            v-bind:id="currentItem.id" 
             v-model="currentItem.isComplete" />
+       <input
+            type="date"
+            v-bind:data-id="currentItem.id"
+            v-model="currentItem.dueDate">
     </div>
     <button @click="updateItem()">Update</button>
 </template>
@@ -40,7 +44,7 @@ export default defineComponent({
                 });
         },
         updateItem() {
-            console.log(`Updating item: ${this.currentItem}`);
+            console.log("updating date: " + this.currentItem.dueDate);
             TodoItemDataService.update(this.currentItem)
                 .then((res: ResponseData) => {
                 })
@@ -50,7 +54,9 @@ export default defineComponent({
         },
     },
     mounted() {
-        this.getItem(this.$route.params.id);
+        var idStr = this.$route.params.id;
+        var idNum: number = +idStr;
+        this.getItem(idNum);
     },
 });
 </script>

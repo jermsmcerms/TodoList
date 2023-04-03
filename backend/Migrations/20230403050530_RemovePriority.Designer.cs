@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TodoList.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    [Migration("20230330002217_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230403050530_RemovePriority")]
+    partial class RemovePriority
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,9 @@ namespace TodoList.Migrations
                     b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("DueDate")
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("IsComplete")
                         .HasColumnType("INTEGER");
