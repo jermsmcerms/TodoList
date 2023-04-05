@@ -24,6 +24,10 @@ public class OpenTodoListService : ITodoListService {
     }
 
     public bool Put(TodoItem item) {
+        if(item.Title == "" || item.Title.Length == 0) {
+            return false;
+        }
+
         TodoItem? todoItem = _context.TodoItems
             .FirstOrDefault(i => i.ItemId == item.ItemId);
         
